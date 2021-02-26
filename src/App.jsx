@@ -1,17 +1,22 @@
 import React from 'react';
-import Login from './components/Login/Login';
-import './App.scss';
-import { useSelector } from 'react-redux';
-import { selectUser } from './redux/features/userSlice';
-import Logout from './components/Logout/Logout';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Navbar } from './components/Navbar/Navbar';
+import Dashboard from './components/Dashboard/Dashboard';
+import SignIn from './components/SignIn/SignIn';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
-  const user = useSelector(selectUser);
-
   return (
-    <div className="App">
-      {user.user.user ? <Logout /> : <Login />}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
